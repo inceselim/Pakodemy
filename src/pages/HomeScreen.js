@@ -3,6 +3,7 @@ import { View, Button, TextInput, Text, SafeAreaView, ActivityIndicator, Touchab
 import styles from "../styles/styles"
 import axios from 'axios';
 import ButtonCard from '../components/ButtonCard/ButtonCard';
+import { BASE_URL } from '../api/api';
 export default function HomeScreen({ navigation }) {
     const [searchText, setSearchText] = useState("Lord")
     const [isLoading, setIsLoading] = useState(false)
@@ -15,7 +16,7 @@ export default function HomeScreen({ navigation }) {
         await axios({
             method: 'get',
             // url: 'http://www.omdbapi.com/?t=' + `${searchText}` + '&apikey=72a3fbe1',
-            url: "https://dummyjson.com/products?limit=10&skip=" + page,
+            url: BASE_URL + "?limit=10&skip=" + page,
             responseType: 'json',
         })
             .then((response) => {
@@ -25,6 +26,25 @@ export default function HomeScreen({ navigation }) {
             })
     }
 
+    const searchData = async () => {
+        setIsLoading(true)
+        await axios({
+            method: 'get',
+            // url: 'http://www.omdbapi.com/?t=' + `${searchText}` + '&apikey=72a3fbe1',
+            url: BASE_URL + "search?q=" + searchText,
+            responseType: 'json',
+        })
+            .then((response) => {
+                setData(response.data.products)
+                //console.log("DATA :    ", data)
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                console.log("err :    ", JSON.stringify(err.response,0,2))
+                setData()
+                setIsLoading(false)
+            })
+    }
 
     const handleGetMore = () => {
         setIsLoading(true)
@@ -51,7 +71,7 @@ export default function HomeScreen({ navigation }) {
                 />
                 {inputFocus && (
                     <Button title='Ara' onPress={() => {
-                        getData()
+                        searchData()
                     }} />
                 )}
                 {inputFocus && (
@@ -66,14 +86,19 @@ export default function HomeScreen({ navigation }) {
             </View>
 
             <View style={styles.content} >
-                <FlatList data={data} onEndReached={handleGetMore}
+                {
+                    data?
+                    <FlatList data={data} onEndReached={handleGetMore}
                     onEndReachedThreshold={0} keyExtractor={(item, index) => index}
-                    ListFooterComponent={isLoading && <ActivityIndicator size={33} /> }
+                    ListFooterComponent={isLoading && <ActivityIndicator size={33} />}
                     renderItem={({ item, index }) => {
                         return (
                             <ButtonCard id={index} title={item.title} brand={item.brand} />
-                        );
-                    }} />
+                            );
+                        }} />
+                    :
+                    <Text>Ürün Bulunamadı...</Text>
+                    }
             </View>
 
         </SafeAreaView>
