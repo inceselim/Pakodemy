@@ -2,34 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { View, Button, TextInput, Text, SafeAreaView, ActivityIndicator, TouchableOpacity, Keyboard, FlatList } from 'react-native';
 import styles from "../styles/styles"
 import axios from 'axios';
+import ButtonCard from '../components/ButtonCard/ButtonCard';
 export default function HomeScreen({ navigation }) {
     const [searchText, setSearchText] = useState("Lord")
+    const [isLoading, setIsLoading] = useState(false)
     const [inputFocus, setInputFocus] = useState(false)
+    const [page, setPage] = useState(0)
     const [data, setData] = useState([])
 
     const getData = async () => {
+        setIsLoading(true)
         await axios({
             method: 'get',
-            url: 'http://www.omdbapi.com/?t=' + `${searchText}` + '&apikey=72a3fbe1',
+            // url: 'http://www.omdbapi.com/?t=' + `${searchText}` + '&apikey=72a3fbe1',
+            url: "https://dummyjson.com/products?limit=10&skip=" + page,
             responseType: 'json',
         })
             .then((response) => {
-                console.log(response.data)
-                setData(response.data)
-                console.log("data", data)
-            });
+                setData(data.concat(response.data.products))
+                //console.log("DATA :    ", data)
+                setIsLoading(false)
+            })
     }
-    const renderItem = ({ item }) => {
-        return (
-            <TouchableOpacity>
-                <Text>{item.Title}</Text>
-            </TouchableOpacity>
-        );
-    };
+
+
+    const handleGetMore = () => {
+        setIsLoading(true)
+        setPage(page + 1)
+    }
 
     useEffect(() => {
+        getData()
+    }, [page])
 
-    }, [])
     return (
         <SafeAreaView style={styles.container} >
             <View style={styles.input}>
@@ -60,14 +65,17 @@ export default function HomeScreen({ navigation }) {
                 )}
             </View>
 
-            <Text>{data.Title}</Text>
-            <FlatList data={JSON.stringify(data)} renderItem={({ item }) => {
-                return (
-                    <TouchableOpacity>
-                        <Text>{item.Writer}</Text>
-                    </TouchableOpacity>
-                );
-            }} />
+            <View style={styles.content} >
+                <FlatList data={data} onEndReached={handleGetMore}
+                    onEndReachedThreshold={0} keyExtractor={(item, index) => index}
+                    ListFooterComponent={isLoading && <ActivityIndicator size={33} /> }
+                    renderItem={({ item, index }) => {
+                        return (
+                            <ButtonCard id={index} title={item.title} brand={item.brand} />
+                        );
+                    }} />
+            </View>
+
         </SafeAreaView>
     );
 }

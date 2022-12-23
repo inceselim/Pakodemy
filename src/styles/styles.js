@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#d9dbda",
         borderRadius: 15,
         alignItems: "center",
-        marginBottom:5,
+        marginBottom: 5,
     },
     searchBar__clicked: {
         padding: 5,
@@ -22,12 +22,17 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         alignItems: "center",
         justifyContent: "space-evenly",
-        marginBottom:5,
+        marginBottom: 5,
     },
     input: {
+        flex:0.1,
         fontSize: 15,
         flexDirection: "row",
-        justifyContent:"space-between"
+        justifyContent: "space-between"
     },
+    content: {
+        flex: 0.9,
+        marginBottom:5,
+    }
 })
 export default styles;
