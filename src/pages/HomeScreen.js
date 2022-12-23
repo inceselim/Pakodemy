@@ -4,13 +4,21 @@ import styles from "../styles/styles"
 import axios from 'axios';
 import ButtonCard from '../components/ButtonCard/ButtonCard';
 import { BASE_URL } from '../api/api';
+
+//
+// i18n
+//
+import "../languages/i18n";
+import { useTranslation } from 'react-i18next'
+// --------
+
 export default function HomeScreen({ navigation }) {
-    const [searchText, setSearchText] = useState("Lord")
+    const [searchText, setSearchText] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [inputFocus, setInputFocus] = useState(false)
     const [page, setPage] = useState(0)
     const [data, setData] = useState([])
-
+    const { t, i18n } = useTranslation();
     const getData = async () => {
         setIsLoading(true)
         await axios({
@@ -40,7 +48,7 @@ export default function HomeScreen({ navigation }) {
                 setIsLoading(false)
             })
             .catch((err) => {
-                console.log("err :    ", JSON.stringify(err.response,0,2))
+                console.log("err :    ", JSON.stringify(err.response, 0, 2))
                 setData()
                 setIsLoading(false)
             })
@@ -59,7 +67,7 @@ export default function HomeScreen({ navigation }) {
         <SafeAreaView style={styles.container} >
             <View style={styles.input}>
                 <TextInput
-                    placeholder="Search"
+                    placeholder={t("Search")}
                     style={inputFocus
                         ? styles.searchBar__clicked
                         : styles.searchBar__unclicked}
@@ -70,9 +78,7 @@ export default function HomeScreen({ navigation }) {
                     }}
                 />
                 {inputFocus && (
-                    <Button title='Ara' onPress={() => {
-                        searchData()
-                    }} />
+                    <Button title='Ara' onPress={() => {searchData()}} />
                 )}
                 {inputFocus && (
                     <Button
@@ -87,18 +93,18 @@ export default function HomeScreen({ navigation }) {
 
             <View style={styles.content} >
                 {
-                    data?
-                    <FlatList data={data} onEndReached={handleGetMore}
-                    onEndReachedThreshold={0} keyExtractor={(item, index) => index}
-                    ListFooterComponent={isLoading && <ActivityIndicator size={33} />}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <ButtonCard id={index} title={item.title} brand={item.brand} />
-                            );
-                        }} />
-                    :
-                    <Text>Ürün Bulunamadı...</Text>
-                    }
+                    data=="" ?
+                        <FlatList data={data} onEndReached={handleGetMore}
+                            onEndReachedThreshold={0} keyExtractor={(item, index) => index}
+                            ListFooterComponent={isLoading && <ActivityIndicator size={33} />}
+                            renderItem={({ item, index }) => {
+                                return (
+                                    <ButtonCard id={index} title={item.title} brand={item.brand} />
+                                );
+                            }} />
+                        :
+                        <Text>{t("Product_Not_Found")}...</Text>
+                }
             </View>
 
         </SafeAreaView>

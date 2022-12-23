@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#d9dbda",
         borderRadius: 15,
         alignItems: "center",
-        justifyContent: "space-evenly",
         marginBottom: 5,
     },
     input: {
