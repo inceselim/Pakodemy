@@ -1,5 +1,8 @@
 {
     "//_Comment1": "Temel",
     "Product_Not_Found": "Ürün Bulunamadı",
-    "Search": "Ara"
+    "Search": "Ara",
+    "Image_Not_Found":"Resim Bulunamadı",
+    "Category":"Kategori",
+    "Product_Detail":"Ürün Detayları"
 }

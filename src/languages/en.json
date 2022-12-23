@@ -1,5 +1,8 @@
 {
     "//_Comment1": "Basic",
     "Product_Not_Found": "Product Not Found",
-    "Search": "Search"
+    "Search": "Search",
+    "Image_Not_Found":"Image Not Found",
+    "Category":"Category",
+    "Product_Details":"Product Details"
 }

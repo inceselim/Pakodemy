@@ -5,6 +5,9 @@ import axios from 'axios';
 import ButtonCard from '../components/ButtonCard/ButtonCard';
 import { BASE_URL } from '../api/api';
 
+import FontAwesome from "react-native-vector-icons/FontAwesome"
+import MaterialIcons from "react-native-vector-icons/MaterialIcons"
+
 //
 // i18n
 //
@@ -29,7 +32,7 @@ export default function HomeScreen({ navigation }) {
         })
             .then((response) => {
                 setData(data.concat(response.data.products))
-                //console.log("DATA :    ", data)
+                console.log("DATA :    ", data)
                 setIsLoading(false)
             })
     }
@@ -44,7 +47,6 @@ export default function HomeScreen({ navigation }) {
         })
             .then((response) => {
                 setData(response.data.products)
-                //console.log("DATA :    ", data)
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -78,28 +80,31 @@ export default function HomeScreen({ navigation }) {
                     }}
                 />
                 {inputFocus && (
-                    <Button title='Ara' onPress={() => {searchData()}} />
+                    <TouchableOpacity onPress={() => { searchData() }} >
+                        <FontAwesome name='search' size={27} />
+                    </TouchableOpacity>
                 )}
                 {inputFocus && (
-                    <Button
-                        title="Cancel"
-                        onPress={() => {
-                            Keyboard.dismiss();
-                            setInputFocus(false);
-                        }}
-                    ></Button>
+                    <TouchableOpacity onPress={() => {
+                        Keyboard.dismiss();
+                        setInputFocus(false);
+                    }}>
+                        <MaterialIcons name='cancel' size={27} />
+                    </TouchableOpacity>
                 )}
             </View>
 
             <View style={styles.content} >
                 {
-                    data=="" ?
+                    data.length > 0 ?
                         <FlatList data={data} onEndReached={handleGetMore}
                             onEndReachedThreshold={0} keyExtractor={(item, index) => index}
                             ListFooterComponent={isLoading && <ActivityIndicator size={33} />}
                             renderItem={({ item, index }) => {
                                 return (
-                                    <ButtonCard id={index} title={item.title} brand={item.brand} />
+                                    <ButtonCard onPress={()=>navigation.navigate("Detail",
+                                    {item:item})}
+                                     id={index} price={item.price} category={item.category} title={item.title} brand={item.brand} />
                                 );
                             }} />
                         :
