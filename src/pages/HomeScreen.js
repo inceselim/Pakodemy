@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation }) {
                         return (
                             <ButtonCard onPress={() => navigation.navigate("Detail",
                                 { item: item })}
-                                id={index} price={item.price} category={item.category} title={item.title} brand={item.brand} />
+                                item={item} />
                         );
                     }} />
             </View>
