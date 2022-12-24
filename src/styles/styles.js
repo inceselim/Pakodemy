@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     searchBar__unclicked: {
         padding: 5,
         flexDirection: "row",
-        width: "90%",
-        backgroundColor: "#d9dbda",
+        width: "100%",
+        backgroundColor: "#fff",
         borderRadius: 15,
         alignItems: "center",
         marginBottom: 5,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         padding: 5,
         flexDirection: "row",
         width: "60%",
-        backgroundColor: "#d9dbda",
+        backgroundColor: "#fff",
         borderRadius: 15,
         alignItems: "center",
         marginBottom: 1,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
     },
     content: {
         flex: 0.9,
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     contentText: {
         fontFamily: "Arial",
         fontSize: 14,
+        paddingLeft:10
     },
 })
 export default styles;

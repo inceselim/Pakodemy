@@ -23,7 +23,7 @@ export default function DetailScreen(props) {
                         item.images.length > 0 ?
                             item.images.map((i) => {
                                 return (
-                                    <Image style={styles.pageImg}
+                                    <Image key={i} style={styles.pageImg}
                                         source={{ uri: i }} />
                                 )
                             })
@@ -31,8 +31,8 @@ export default function DetailScreen(props) {
                     }
                 </ScrollView>
             </View>
-            <View>
-                <View style={{ flexDirection: "row",justifyContent:"space-between" }}>
+            <View style={{elevation:3,flex:1,borderTopLeftRadius:14,borderTopEndRadius:14}} >
+                <View style={{ flexDirection: "row",justifyContent:"space-between",padding:10 }}>
                     <Text style={styles.contentTitle}>{item.title} </Text>
                     <Text style={styles.contentTitle}>{item.price} $</Text>
 

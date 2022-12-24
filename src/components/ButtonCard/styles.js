@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         paddingTop:3,
         flexDirection:"row",
         alignItems:"center",
-        backgroundColor:"#ff0",
+        backgroundColor:"#fa1",
         justifyContent:"space-between",
         borderRadius:20,
         borderColor:"#ccc",
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         borderRadius:160,
         padding:6,
         marginStart:3,
-        backgroundColor: "#039be5",
+        backgroundColor: "#aadaf5",
         alignItems: "center",
         justifyContent: "center",
         flex: 0.1
