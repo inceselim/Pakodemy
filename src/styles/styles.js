@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     },
     pageImg: {
         height: 150,
-        width: screenWidth-50,
-        alignContent:"center",
+        width: screenWidth - 50,
+        alignContent: "center",
         marginLeft: 10,
         borderRadius: 30,
         marginTop: 10
@@ -56,12 +56,19 @@ const styles = StyleSheet.create({
         fontFamily: "Arial",
         fontSize: 18,
         color: "#033",
-        marginBottom:5,
+        marginBottom: 5,
     },
     contentText: {
         fontFamily: "Arial",
         fontSize: 14,
-        paddingLeft:10
+        paddingLeft: 10
+    },
+    errorText: {
+        fontFamily: "Arial",
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "#a13",
+        textAlign: "center"
     },
 })
 export default styles;

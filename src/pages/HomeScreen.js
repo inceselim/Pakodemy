@@ -9,7 +9,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchData, selectData, selectLoading, isLoading } from '../redux/features/dataSlice/dataSlice';
+import { fetchData, selectData, selectLoading, isLoading,searchData } from '../redux/features/dataSlice/dataSlice';
 //
 // i18n
 //
@@ -28,20 +28,8 @@ export default function HomeScreen({ navigation }) {
 
     const dispatch = useDispatch();
 
-    const searchData = async () => {
-        await axios({
-            method: 'get',
-            // url: 'http://www.omdbapi.com/?t=' + `${searchText}` + '&apikey=72a3fbe1',
-            url: BASE_URL + "search?q=" + searchText,
-            responseType: 'json',
-        })
-            .then((response) => {
-                setData(response.data.products)
-            })
-            .catch((err) => {
-                console.log("err :    ", JSON.stringify(err.response, 0, 2))
-                setData()
-            })
+    const search =  () => {
+        dispatch(searchData(searchText))
     }
 
     const handleGetMore = () => {
@@ -69,7 +57,7 @@ export default function HomeScreen({ navigation }) {
                     }}
                 />
                 {inputFocus && (
-                    <TouchableOpacity onPress={() => { searchData() }} >
+                    <TouchableOpacity onPress={() => { search() }} >
                         <FontAwesome name='search' size={27} />
                     </TouchableOpacity>
                 )}
@@ -101,7 +89,7 @@ export default function HomeScreen({ navigation }) {
                     loading === true ?
                         <ActivityIndicator size={35} />
                         :
-                        <Text>{t("Product_Not_Found")}...</Text>
+                        <Text style={styles.errorText} >{t("Product_Not_Found")}...</Text>
                 }
             </View>
 

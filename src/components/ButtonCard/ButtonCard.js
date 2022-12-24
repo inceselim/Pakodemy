@@ -6,7 +6,7 @@ export default function ButtonCard({ title, brand, category, price, id, onPress 
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={styles.itemId}>
-                <Text style={styles.titleText}>{id}</Text>
+                <Text style={styles.titleText}>{id + 1}</Text>
             </View>
 
             <View style={styles.textContent}>
