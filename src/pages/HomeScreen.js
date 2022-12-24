@@ -9,7 +9,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchData, selectData, selectLoading, isLoading,searchData } from '../redux/features/dataSlice/dataSlice';
+import { fetchData, selectData, selectLoading, isLoading, searchData } from '../redux/features/dataSlice/dataSlice';
 //
 // i18n
 //
@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }) {
 
     const dispatch = useDispatch();
 
-    const search =  () => {
+    const search = () => {
         dispatch(searchData(searchText))
     }
 
@@ -72,25 +72,18 @@ export default function HomeScreen({ navigation }) {
             </View>
 
             <View style={styles.content} >
-                {
-                    data.length > 0 ?
-                        <FlatList data={data} onEndReached={handleGetMore}
-                            onEndReachedThreshold={0.4} keyExtractor={(item, index) => index}
-                            ListFooterComponent={loading && <ActivityIndicator size={33} />}
-                            onRefresh={handleRefresh} refreshing={refresh}
-                            renderItem={({ item, index }) => {
-                                return (
-                                    <ButtonCard onPress={() => navigation.navigate("Detail",
-                                        { item: item })}
-                                        id={index} price={item.price} category={item.category} title={item.title} brand={item.brand} />
-                                );
-                            }} />
-                        : 
-                    loading === true ?
-                        <ActivityIndicator size={35} />
-                        :
-                        <Text style={styles.errorText} >{t("Product_Not_Found")}...</Text>
-                }
+                <FlatList data={data} onEndReached={handleGetMore}
+                    onEndReachedThreshold={0.4} keyExtractor={(item, index) => index}
+                    ListFooterComponent={loading && <ActivityIndicator size={33} />}
+                    onRefresh={handleRefresh} refreshing={refresh}
+                    ListEmptyComponent={<Text style={styles.errorText} >{t("Product_Not_Found")}...</Text>}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <ButtonCard onPress={() => navigation.navigate("Detail",
+                                { item: item })}
+                                id={index} price={item.price} category={item.category} title={item.title} brand={item.brand} />
+                        );
+                    }} />
             </View>
 
         </SafeAreaView>
