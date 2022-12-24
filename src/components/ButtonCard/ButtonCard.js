@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import styles from './styles';
 
 export default function ButtonCard({ item, onPress }) {
-    console.log(item)
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <ScrollView pagingEnabled horizontal >
