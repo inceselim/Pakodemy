@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, TextInput, Text, SafeAreaView, ActivityIndicator, TouchableOpacity, Keyboard, FlatList } from 'react-native';
+import { View, TextInput, Text, SafeAreaView, ActivityIndicator, TouchableOpacity, Keyboard, FlatList } from 'react-native';
 import styles from "../styles/styles"
-import axios from 'axios';
 import ButtonCard from '../components/ButtonCard/ButtonCard';
-import { BASE_URL } from '../api/api';
 
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchData, selectData, selectLoading, isLoading, searchData } from '../redux/features/dataSlice/dataSlice';
+import { fetchData, selectData, selectLoading, searchData } from '../redux/features/dataSlice/dataSlice';
 //
 // i18n
 //

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView } from 'react-native';
 import styles from './styles';
 
 export default function ButtonCard({ item, onPress }) {
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <Pressable style={styles.container} onPress={onPress}>
             <ScrollView pagingEnabled horizontal >
                 {
                     item.images.map((i) =>
@@ -23,6 +23,6 @@ export default function ButtonCard({ item, onPress }) {
                     <Text style={styles.discountText}>{item.price} $</Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }

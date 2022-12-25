@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         fontFamily: "Arial",
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: "bold",
         color: "#a13",
         textAlign: "center"
